@@ -1,0 +1,110 @@
+# REGIME PRICING SYSTEM - CONFIGURATION
+# ======================================
+
+# ---------------------------------------------------------------------
+# JUMP DETECTION
+# ---------------------------------------------------------------------
+jump_detection:
+  threshold: 3.0
+  window: 20
+  min_observations: 30
+  use_robust: true
+
+# ---------------------------------------------------------------------
+# VOLATILITY ENGINE
+# ---------------------------------------------------------------------
+volatility:
+  bull_ewma_lambda: 0.94
+  crisis_ewma_lambda: 0.85
+  garch_p: 1
+  garch_q: 1
+  min_variance: 1.0e-6
+
+# ---------------------------------------------------------------------
+# DRIFT ENGINE (Kalman Filter)
+# ---------------------------------------------------------------------
+drift:
+  initial_drift: 0.0
+  state_noise_factor: 1.0e-5
+  min_obs_variance: 1.0e-6
+  adaptive: true
+
+# ---------------------------------------------------------------------
+# REGIME DETECTOR
+# ---------------------------------------------------------------------
+regime:
+  bull_vol_threshold: 0.33
+  crisis_vol_threshold: 0.67
+  jump_rate_high: 0.05
+  drawdown_crisis: -0.15
+  transition_window: 5
+  min_regime_duration: 10
+
+# ---------------------------------------------------------------------
+# PRICING (Black–Scholes & Merton)
+# ---------------------------------------------------------------------
+pricing:
+  min_tte: 0.01
+  max_tte: 365
+
+  # Canonical pricing assumption
+  default_risk_free_rate: 0.04
+
+  jump_intensity_multiplier: 1.0
+
+# ---------------------------------------------------------------------
+# MISPRICING SIGNAL
+# ---------------------------------------------------------------------
+mispricing:
+  ema_alpha: 0.3
+  buy_threshold: 0.02
+  sell_threshold: -0.02
+  min_signal_strength: 0.01
+
+# ---------------------------------------------------------------------
+# KELLY CRITERION
+# ---------------------------------------------------------------------
+kelly:
+  fraction: 0.25
+  max_position: 0.10
+  min_position: 0.01
+  jump_risk_multiplier: 2.0
+  uncertainty_penalty: true
+  uncertainty_scale: 10.0
+  position_ema_alpha: 0.3
+  bull_max_position: 0.10
+  sideways_max_position: 0.08
+  crisis_max_position: 0.05
+
+# ---------------------------------------------------------------------
+# DECISION ENGINE
+# ---------------------------------------------------------------------
+decision:
+  min_confidence: 0.6
+  allow_crisis_trades: false
+  max_positions: 5
+
+# ---------------------------------------------------------------------
+# SYSTEM (GLOBAL ASSUMPTIONS)
+# ---------------------------------------------------------------------
+system:
+  log_level: "INFO"
+  log_file: "logs/system.log"
+
+  price_column: "Close"
+  date_column: "Date"
+  frequency: "daily"
+  min_data_points: 100
+
+  # ✅ REQUIRED BY main.py
+  risk_free_rate: 0.04
+
+# ---------------------------------------------------------------------
+# CALIBRATION
+# ---------------------------------------------------------------------
+calibration:
+  mode: "default"
+  train_start: null
+  train_end: null
+  test_start: null
+  test_end: null

@@ -1,0 +1,43 @@
+2026-01-30 15:04:47 | INFO | Starting system...
+2026-01-30 15:04:47 | INFO | Loading data from data/raw/sample_data.csv
+2026-01-30 15:04:47 | ERROR | Data file not found: data/raw/sample_data.csv
+2026-01-30 15:04:47 | INFO | Creating sample data for testing...
+2026-01-30 15:04:47 | INFO | Sample data created at data/raw/sample_data.csv
+2026-01-30 15:04:47 | INFO | Calculating log returns...
+2026-01-30 15:04:47 | INFO | Returns: mean=0.002148, std=0.019832
+2026-01-30 15:04:47 | INFO | Detecting jumps...
+2026-01-30 15:04:47 | INFO | JumpDetector initialized with threshold=3.0, window=20
+2026-01-30 15:04:47 | INFO | Detected 3 jumps (0.60% of data)
+2026-01-30 15:04:47 | INFO | Average jump magnitude: 0.0416
+2026-01-30 15:04:47 | INFO | Jump parameters: μⱼ=-0.0149, σⱼ=0.0477, λ=0.0060
+2026-01-30 15:04:47 | INFO | Estimating volatility...
+2026-01-30 15:04:47 | INFO | VolatilityEngine initialized: bull_λ=0.94, crisis_λ=0.85
+2026-01-30 15:04:47 | INFO | Volatility: mean=0.0193, current=0.0201
+2026-01-30 15:04:47 | INFO | Estimating drift (Kalman filter)...
+2026-01-30 15:04:47 | INFO | DriftEngine initialized: μ₀=0.000000, Q_factor=0.000010
+2026-01-30 15:04:48 | INFO | Drift estimation complete. Mean μ=nan, Current μ=nan
+2026-01-30 15:04:48 | INFO | Drift: mean=nan, current=nan
+2026-01-30 15:04:48 | INFO | Saving intermediate results...
+2026-01-30 15:04:48 | INFO | Results saved to data\processed\intermediate_results.csv
+2026-01-30 15:04:48 | INFO | System execution complete
+2026-01-30 15:24:23 | INFO | Starting system...
+2026-01-30 15:24:23 | INFO | Loading data from data/raw/sample_data.csv
+2026-01-30 15:24:24 | INFO | Loaded 500 rows from 2022-01-01 00:00:00 to 2023-05-15 00:00:00
+2026-01-30 15:24:24 | INFO | ✅ Data validation passed
+2026-01-30 15:24:24 | INFO | Calculating log returns...
+2026-01-30 15:24:24 | INFO | Returns: mean=0.002148, std=0.019832
+2026-01-30 15:24:24 | INFO | Detecting jumps...
+2026-01-30 15:24:24 | INFO | JumpDetector initialized with threshold=3.0, window=20
+2026-01-30 15:24:24 | INFO | Detected 3 jumps (0.60% of data)
+2026-01-30 15:24:24 | INFO | Average jump magnitude: 0.0416
+2026-01-30 15:24:24 | INFO | Jump parameters: μⱼ=-0.0149, σⱼ=0.0477, λ=0.0060
+2026-01-30 15:24:24 | INFO | Estimating volatility...
+2026-01-30 15:24:24 | INFO | VolatilityEngine initialized: bull_λ=0.94, crisis_λ=0.85
+2026-01-30 15:24:24 | INFO | Volatility: mean=0.0193, current=0.0201
+2026-01-30 15:24:24 | INFO | Estimating drift (Kalman filter)...
+2026-01-30 15:24:24 | INFO | DriftEngine initialized: μ₀=0.000000, Q_factor=0.000010
+2026-01-30 15:24:24 | INFO | Drift estimation complete. Mean μ=0.001963, Current μ=0.001565
+2026-01-30 15:24:24 | INFO | Drift: mean=0.001963, current=0.001565
+2026-01-30 15:24:24 | INFO | Saving intermediate results...
+2026-01-30 15:24:24 | INFO | Results saved to data\processed\intermediate_results.csv
+2026-01-30 15:24:24 | INFO | System execution complete
