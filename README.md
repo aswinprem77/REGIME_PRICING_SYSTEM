@@ -93,42 +93,42 @@ python main.py
 
 ## 🎓 Learning Path (For Beginners)
 
-### Week 1: Understand the Data
+### 1: Understand the Data
 - Run `notebooks/01_data_exploration.ipynb`
 - Learn what log returns are
 - Visualize price movements
 
-### Week 2: Jump Detection
+### 2: Jump Detection
 - Study `modules/jump_detector.py`
 - Run `tests/test_jump_detector.py`
 - Understand why we separate jumps
 
-### Week 3: Volatility
+### 3: Volatility
 - Study `modules/volatility_engine.py`
 - Learn EWMA, GARCH
 - See regime differences
 
-### Week 4: Drift (Kalman Filter)
+### 4: Drift (Kalman Filter)
 - Study `modules/drift_engine.py`
 - Understand state-space models
 - Run the Kalman filter
 
-### Week 5: Regimes
+### 5: Regimes
 - Study `modules/regime_detector.py`
 - Learn Bull/Sideways/Crisis detection
 - Soft switching logic
 
-### Week 6: Pricing
+### 6: Pricing
 - Study `modules/pricing.py`
 - Black-Scholes formula
 - Merton jump-diffusion
 
-### Week 7: Integration
+### 7: Integration
 - Run full pipeline
 - Understand mispricing
 - Test decision logic
 
-### Week 8: Kelly Sizing
+### 8: Kelly Sizing
 - Study `modules/kelly_sizer.py`
 - Learn fractional Kelly
 - Understand risk controls
@@ -164,29 +164,7 @@ kelly:
 4. **Calibrate in order** (jump → vol → drift → regime → kelly)
 5. **Paper trade first** (no real money until confident)
 
----
 
-## 🐛 Debugging Tips
-
-### "Module not found"
-```bash
-pip install -r requirements.txt
-```
-
-### "Can't find data"
-- Check `data/raw/` has your CSV
-- Check file name matches in `main.py`
-
-### "Weird results"
-- Start with `tests/` to validate each module
-- Check `configs/parameters.yaml` for reasonable values
-
-### "I'm lost"
-- Read `docs/ARCHITECTURE.md`
-- Run notebooks in order
-- Ask questions in comments
-
----
 
 ## 📚 Key Concepts (Simple Explanations)
 
@@ -241,12 +219,5 @@ pip install -r requirements.txt
 
 ---
 
-## 🏁 Next Steps
 
-1. Read `setup_guide.md` (detailed setup)
-2. Run `python tests/test_all.py`
-3. Open `notebooks/00_introduction.ipynb`
-4. Study one module per week
-5. Build understanding before tweaking
-
-**Take your time. This is complex. You're building real quant infrastructure.**
+**thank you**
