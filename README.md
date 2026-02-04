@@ -1,6 +1,6 @@
 # Regime-Aware BS–Merton Pricing + Kelly Allocation System
 
-## 🎯 What This System Does
+## What This System Does
 
 This is a **decision engine** that tells you:
 - **BUY / SELL / REFUSE** (should you trade?)
@@ -41,7 +41,7 @@ regime_pricing_system/
 
 ---
 
-## 🚀 Quick Start (Beginner-Friendly)
+## Quick Start
 
 ### Step 1: Install Python
 - Download Python 3.9+ from [python.org](https://python.org)
@@ -72,7 +72,7 @@ python main.py
 
 ---
 
-## 📊 System Pipeline (In Order)
+## System Pipeline (In Order)
 
 ```
 1. Prices → Log Returns
@@ -154,19 +154,9 @@ kelly:
 
 **NEVER touch these until you understand each module.**
 
----
-
-## 🛡️ Safety Rules
-
-1. **Test everything** before running on real data
-2. **Start with small data** (1 month)
-3. **Never optimize Kelly for profit** (tune for stability)
-4. **Calibrate in order** (jump → vol → drift → regime → kelly)
-5. **Paper trade first** (no real money until confident)
 
 
-
-## 📚 Key Concepts (Simple Explanations)
+## Key Concepts (Simple Explanations)
 
 **Log Returns**: % change in price (safer math than raw %)
 
@@ -194,26 +184,6 @@ kelly:
 ✅ Jump detection finds obvious crashes  
 ✅ Kelly never suggests >10% position  
 ✅ REFUSE is the most common decision (this is good!)  
-
----
-
-## 📞 Support
-
-- Read module READMEs (`modules/README_*.md`)
-- Check `docs/FAQ.md`
-- Review test files for usage examples
-- Comments are everywhere - read them!
-
----
-
-## ⚠️ Critical Warnings
-
-🚨 **This is a research system, not production-ready**  
-🚨 **Do NOT use real money until you:**
-   - Understand every line of code
-   - Validated on 2+ years of data
-   - Paper traded for 3+ months
-   - Have proper risk management
 
 🚨 **Parameters are NOT optimized yet** (that comes later)
 
