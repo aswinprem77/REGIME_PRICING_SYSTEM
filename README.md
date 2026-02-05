@@ -190,20 +190,6 @@ python modules/drift_engine.py
 ```
 
 ---
-
-## Learning Path
-
-**Week 1:** Understand jump detection  
-**Week 2:** Volatility estimation  
-**Week 3:** Drift (Kalman filter)  
-**Week 4:** Regime detection  
-**Week 5:** Pricing models  
-**Week 6:** Mispricing + decisions  
-**Week 7:** Kelly sizing  
-**Week 8:** Full integration
-
-Take your time. This is complex infrastructure.
-
 ---
 
 ## Important Notes
@@ -230,12 +216,6 @@ This is correct. Most mispricing signals are noise.
 
 ## Warnings
 
-⚠️ Do NOT use on real money without:
-- Understanding every line of code
-- Validating on 2+ years of historical data
-- Paper trading for 3+ months
-- Proper risk management infrastructure
-
 ⚠️ This system does NOT:
 - Predict future returns
 - Guarantee profits
@@ -258,20 +238,7 @@ The authors are not responsible for any financial losses.
 Past performance does not guarantee future results.  
 Options trading involves substantial risk.
 
-**Not financial advice.**  
-Consult a licensed professional before trading.
-
 ---
-
-## Documentation
-
-- `setup_guide.md` - Detailed installation instructions
-- `notebooks/00_introduction.ipynb` - Interactive tutorial
-- Module docstrings - Inline documentation
-- `configs/parameters.yaml` - Parameter explanations
-
----
-
 ## License
 
 Research and educational use only.  
