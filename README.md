@@ -1,193 +1,162 @@
-# Regime-Aware BS–Merton Pricing + Kelly Allocation System
+# Regime-Aware BS–Merton Pricing & Kelly Allocation System
 
-## What This System Does
+## Overview
 
-This is a **decision engine** that tells you:
-- **BUY / SELL / REFUSE** (should you trade?)
-- **POSITION SIZE** (how much to risk?)
+This project implements a **regime-aware option mispricing and decision engine**.  
+It compares market option prices against model prices derived from Black–Scholes and Merton jump-diffusion models, dynamically adjusts parameters based on market conditions, and produces **BUY / SELL / REFUSE** decisions with **risk-controlled position sizing**.
 
-It's NOT a prediction model. It's a **pricing disagreement detector** with smart risk control.
+The system is designed for **pricing disagreement detection and capital allocation**, not for return prediction.
 
 ---
 
-## 📁 Project Structure
+## Design Philosophy
 
-```
+- Focus on **mispricing**, not forecasting
+- Explicit separation of **diffusion risk vs jump risk**
+- **Soft regime transitions** instead of hard switches
+- Conservative, fractional **Kelly sizing**
+- Stability and robustness prioritized over profit optimization
+
+This is a **research-oriented system**, not a production trading engine.
+
+---
+
+## System Pipeline
+
+Prices
+↓
+Log Returns
+↓
+Jump Detection (Jump / Diffusion split)
+↓
+Volatility Estimation (σₜ, regime-aware)
+↓
+Drift Estimation (μₜ via Kalman filter)
+↓
+Regime Detection (Bull / Sideways / Crisis)
+↓
+BS–Merton Pricing
+↓
+Mispricing Measurement
+↓
+Decision Logic (BUY / SELL / REFUSE)
+↓
+Kelly-Based Position Sizing
+
+
+---
+
+## Project Structure
+
 regime_pricing_system/
 │
-├── data/                  # Your price data goes here
-│   ├── raw/              # Original CSV files
-│   └── processed/        # Cleaned data
+├── configs/ # System parameters
+├── data/
+│ ├── raw/ # Input market data
+│ └── processed/ # Intermediate outputs
 │
-├── modules/              # Core system components
-│   ├── jump_detector.py      # Finds jumps in returns
-│   ├── volatility_engine.py  # Calculates σₜ
-│   ├── drift_engine.py       # Calculates μₜ (Kalman filter)
-│   ├── regime_detector.py    # Bull/Sideways/Crisis detection
-│   ├── pricing.py            # BS + Merton pricing
-│   ├── mispricing.py         # Market vs Model comparison
-│   ├── kelly_sizer.py        # Position sizing
-│   └── decision_engine.py    # Final BUY/SELL/REFUSE output
+├── modules/
+│ ├── jump_detector.py
+│ ├── volatility_engine.py
+│ ├── drift_engine.py
+│ ├── regime_engine.py
+│ ├── pricing_engine.py
+│ ├── mispricing_engine.py
+│ └── decision_engine.py
 │
-├── tests/                # Test each module
-├── notebooks/            # Jupyter notebooks for exploration
-├── configs/              # Parameter settings
-├── docs/                 # Documentation
+├── notebooks/ # Analysis & exploration
+├── tests/ # Unit tests
 │
-├── requirements.txt      # Python packages needed
-├── setup_guide.md       # Detailed setup instructions
-└── main.py              # Run the whole system
-```
+├── main.py # System entry point
+├── requirements.txt
+└── README.md
+
 
 ---
 
-## Quick Start
+## Data Requirements
 
-### Step 1: Install Python
-- Download Python 3.9+ from [python.org](https://python.org)
-- During installation, **CHECK "Add Python to PATH"**
+Minimum required columns:
+- `Date`
+- `Close`
 
-### Step 2: Open VS Code
-- Open this folder in VS Code
-- Open Terminal (View → Terminal or Ctrl+`)
+Optional (for option-level analysis):
+- `Strike`
+- `Expiry`
+- `OptionPrice`
+- `RiskFreeRate`
 
-### Step 3: Install Required Packages
+Input data is expected in CSV format under `data/raw/`.
+
+---
+
+## Usage
+
+Install dependencies:
 ```bash
 pip install -r requirements.txt
-```
+Run the system:
 
-### Step 4: Prepare Your Data
-- Put your price CSV in `data/raw/`
-- Required columns: `Date`, `Close`, `Strike`, `Expiry`, `OptionPrice`, `RiskFreeRate`
-
-### Step 5: Run Tests
-```bash
-python -m pytest tests/
-```
-
-### Step 6: Run the System
-```bash
 python main.py
-```
+The system outputs:
 
----
+Regime probabilities
 
-## System Pipeline (In Order)
+Model vs market price comparison
 
-```
-1. Prices → Log Returns
-2. Jump Detection → Separate jumps from diffusion
-3. Volatility Engine → Calculate σₜ (regime-aware)
-4. Drift Engine → Calculate μₜ (Kalman filter)
-5. Regime Detector → Bull/Sideways/Crisis probabilities
-6. Effective Parameters → Smooth regime transitions
-7. BS–Merton Pricing → Model price
-8. Mispricing → ΔCₜ = Model - Market
-9. Decision Logic → BUY/SELL/REFUSE
-10. Kelly Sizing → How much to allocate
-```
+Mispricing signal
 
-**Order is critical. Don't skip steps.**
+Final action (BUY / SELL / REFUSE)
 
----
+Suggested position size
 
-## 🎓 Learning Path (For Beginners)
+Configuration
+All parameters are defined in:
 
-### 1: Understand the Data
-- Run `notebooks/01_data_exploration.ipynb`
-- Learn what log returns are
-- Visualize price movements
+configs/parameters.yaml
+Configurable components include:
 
-### 2: Jump Detection
-- Study `modules/jump_detector.py`
-- Run `tests/test_jump_detector.py`
-- Understand why we separate jumps
+Jump detection thresholds
 
-### 3: Volatility
-- Study `modules/volatility_engine.py`
-- Learn EWMA, GARCH
-- See regime differences
+Volatility decay factors
 
-### 4: Drift (Kalman Filter)
-- Study `modules/drift_engine.py`
-- Understand state-space models
-- Run the Kalman filter
+Kalman filter noise parameters
 
-### 5: Regimes
-- Study `modules/regime_detector.py`
-- Learn Bull/Sideways/Crisis detection
-- Soft switching logic
+Regime transition rules
 
-### 6: Pricing
-- Study `modules/pricing.py`
-- Black-Scholes formula
-- Merton jump-diffusion
+Kelly sizing constraints
 
-### 7: Integration
-- Run full pipeline
-- Understand mispricing
-- Test decision logic
+Parameters are intentionally conservative and not optimized for profit.
 
-### 8: Kelly Sizing
-- Study `modules/kelly_sizer.py`
-- Learn fractional Kelly
-- Understand risk controls
+Current Status
+Implemented:
 
----
+Jump detection
 
-## ⚙️ Configuration
+Volatility estimation
 
-All parameters are in `configs/parameters.yaml`:
+Drift estimation (Kalman filter)
 
-```yaml
-jump_detection:
-  threshold: 3.0  # Standard deviations
-  
-volatility:
-  bull_ewma_lambda: 0.94
-  crisis_ewma_lambda: 0.85
-  
-kelly:
-  fraction: 0.25  # Never use full Kelly!
-  max_position: 0.10  # 10% max
-```
+Regime classification
 
-**NEVER touch these until you understand each module.**
+BS–Merton pricing
 
+Mispricing measurement
 
+Risk-controlled Kelly sizing
 
-## Key Concepts (Simple Explanations)
+End-to-end decision output
 
-**Log Returns**: % change in price (safer math than raw %)
+Planned:
 
-**Jump**: Huge sudden move (crisis, news)
+Historical backtesting
 
-**Diffusion**: Normal random wiggling
+Parameter calibration framework
 
-**Volatility (σ)**: How much prices swing daily
+Live data integration
 
-**Drift (μ)**: Average direction of movement
+Greeks-aware risk overlays
 
-**Regime**: Market mood (Bull/Sideways/Crisis)
-
-**Mispricing**: Your model price ≠ market price
-
-**Kelly**: Math formula for bet sizing (we use fractional)
-
----
-
-## 🎯 What Success Looks Like
-
-✅ All tests pass  
-✅ Regimes detected correctly on historical data  
-✅ Volatility estimates are smooth  
-✅ Jump detection finds obvious crashes  
-✅ Kelly never suggests >10% position  
-✅ REFUSE is the most common decision (this is good!)  
-
-🚨 **Parameters are NOT optimized yet** (that comes later)
-
----
-
-
-**thank you**
+Disclaimer
+This project is for research and educational purposes only.
+It is not intended for live trading or financial advice.
